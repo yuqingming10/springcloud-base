@@ -1,0 +1,23 @@
+server:
+  port: 80
+spring:
+  application:
+    name: test-consumer
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10086/eureka
+    registry-fetch-interval-seconds: 5 #默认30s会拉取Eureka Server服务的列表只读备份
+test-provider1: #生产者服务名字
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+feign:
+  hystrix:
+    enabled: true
+logging:
+  level:
+    com.leyou.testconsumer: debug
+  path: /home/test-consumer #默认是项目的根目录下，  和上一个file参数这两个配置不能同时生效
+  pattern:
+    console: '%d{yyyy/MM/dd-HH:mm:ss} [%thread] %-5level %logger- %msg%n'
+    file: '%d{yyyy/MM/dd-HH:mm} [%thread] %-5level %logger- %msg%n'

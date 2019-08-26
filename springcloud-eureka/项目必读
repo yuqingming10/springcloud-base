@@ -1,0 +1,5 @@
+启动：springcloud-eureka，springcloud-zuul，test-provider1，test-consumer
+在浏览器可以访问，http://127.0.0.1:10086/    eureka注册中心
+http://127.0.0.1:10010/api/test-provider1/user/1?token=xx   从test-provider1经过网关配置的前缀是api且拦截无token参数的请求
+http://localhost/consumer/user?id=2   普通的消费者调用生产者（不经过网关）
+http://127.0.0.1:10010/api/test-consumer/consumer/user?id=2&token=xxx   从test-consumer经过网关配置的前缀是api且拦截无token参数的请求

@@ -1,0 +1,20 @@
+server:
+  port: 10086 # 端口
+spring:
+  application:
+    name: eureka-server # 应用名称，会在Eureka中显示,本注册中心也是一个微服务
+eureka:
+  client:
+    service-url: # EurekaServer的地址，现在是自己的地址，如果是集群，需要加上其它Server的地址。是map参数key: value,
+      defaultZone: http://127.0.0.1:${server.port}/eureka
+  server:
+    enable-self-preservation: false # 关闭自我保护模式（缺省为打开）
+    eviction-interval-timer-in-ms: 1000 #扫描失效服务的间隔时间（缺省为60*1000ms）
+logging: #默认使用LogBack日志系统,slf4j日志 。对于feign组件的日志有不同，请看具体笔记
+  level:
+    com.leyou.springcloudeureka: debug #要写上包名才可以
+  #file: yo-test.log #默认名称：spring.log
+  path: /home #默认是项目的根目录下，  和上一个file参数这两个配置不能同时生效
+  pattern:
+    console: '%d{yyyy/MM/dd-HH:mm:ss} [%thread] %-5level %logger- %msg%n'
+    file: '%d{yyyy/MM/dd-HH:mm} [%thread] %-5level %logger- %msg%n'
